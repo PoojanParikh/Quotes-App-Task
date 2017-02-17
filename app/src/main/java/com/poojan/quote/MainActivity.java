@@ -20,7 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class GridMainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     int[] image = new int[]{R.drawable.ic_life,R.drawable.ic_vue,R.drawable.ic_facebook_love,R.drawable.ic_fedora,R.drawable.ic_pinterest_circle,R.drawable.ic_yaoming_meme,R.drawable.ic_mega_icon};
     GridView gridView;
@@ -39,17 +39,17 @@ public class GridMainActivity extends AppCompatActivity {
 
     class MyGridClass extends AsyncTask<String, Void, String> {
 
-        ProgressDialog dialog;
+        ProgressDialog progressDialog;
 
 
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(GridMainActivity.this);
-            dialog.setMessage("Loading...");
-            dialog.setCancelable(false);
-            dialog.show();
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
         @Override
@@ -87,8 +87,8 @@ public class GridMainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (dialog.isShowing()) {
-                dialog.dismiss();
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
             }
             ArrayList<QuotesCatagoryModel> quotesCatagoryModelArrayList = new ArrayList<>();
 
@@ -117,7 +117,7 @@ public class GridMainActivity extends AppCompatActivity {
             }
 
 
-            CustomAdapterGrid customAdapterGrid = new CustomAdapterGrid(GridMainActivity.this,quotesCatagoryModelArrayList,image);
+            CustomAdapterGrid customAdapterGrid = new CustomAdapterGrid(MainActivity.this,quotesCatagoryModelArrayList,image);
             gridView=(GridView) findViewById(R.id.grid_view);
             gridView.setAdapter(customAdapterGrid);
         }
